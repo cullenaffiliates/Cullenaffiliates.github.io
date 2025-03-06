@@ -7,5 +7,50 @@
 
 <img src="IMG_1077.gif" style="width 500px"/>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moving Word</title>
+    <style>
+    	body {
+        	margin: 0;
+            overflow: hidden; 
+            background-color: #f0f0f0:
+        }
+        #movingWord {
+        	position: absolute;
+            top: 50%;
+            left: -200px;
+            font-size: 36px;
+            font-family: Helvetica, sans-serif;
+            color: #ff4500
+        }
+    </style>
+</head>
+<body>
+    <div id="movingWord">Jollibruh</div>
+    
+    <script>
+    	const word = document.getElementById("movingWord");
+        let position = -200; 
+        const speed = 2;
+        const screenWidth = window.innerWidth;
+        
+        function moveWord() {
+        	position += speed;
+            word.style.left = position + "px";
+            
+            if (position > screenWidth) {
+            position = -200;
+        	}
+        
+        	requestAnimationFrame(moveWord)
+    	}
+    
+    	moveWord();
+    </script>
+            
+
 </body>
 </html>
