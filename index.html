@@ -20,9 +20,9 @@
         }
         #movingWord {
         	position: absolute;
-            top: 50%;
-            left: -200px;
-            font-size: 600px;
+            top: 30%;
+            left: 0px;
+            font-size: 300px;
             font-family: Helvetica, sans-serif;
             color: #ff4500
         }
@@ -33,7 +33,7 @@
     
     <script>
     	const word = document.getElementById("movingWord");
-        let position = -200; 
+        let position = 0; 
         const speed = 2;
         const screenWidth = window.innerWidth;
         
@@ -42,7 +42,7 @@
             word.style.left = position + "px";
             
             if (position > screenWidth) {
-            position = -200;
+            position = 0;
         	}
         
         	requestAnimationFrame(moveWord)
