@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
-</head>
-<body>
-
-<img src="IMG_1077.gif" style="width:1000px;">
-
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <title>Moving Word</title>
     <style>
@@ -16,6 +8,11 @@
         	margin: 0;
             overflow: hidden; 
             background-color: #FCFAEE:
+        }
+        #debug{
+        height:300px;
+        width:300px;
+        background-color:yellow;
         }
         #movingWord {
         	position: absolute;
@@ -27,7 +24,11 @@
         }
     </style>
 </head>
+
 <body>
+
+	<img src="IMG_1077.gif" style="width:1000px;">
+
     <div id="movingWord">Jollibruh</div>
     
     <script>
@@ -49,11 +50,7 @@
     
     	moveWord();
 
-        function changeSize() {
-            var slider = document.gteElementById("sizeSlider");
-            var image = document .getElementById("myImage");
-            image.style.width = slider .value + "px";
-        }
+        
     </script>
             
 
