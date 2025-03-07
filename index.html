@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <title>Moving Word</title>
     <style>
-    	html, body {
+    	body {
         	margin: 0;
             overflow: hidden; 
             background-color: #FCFAEE:
-        }
-        #debug{
-        height:300px;
-        width:300px;
-        background-color:yellow;
         }
         #movingWord {
         	position: absolute;
             top: 30%;
             left: 0px;
             font-size: 300px;
-            font-family: Helvetica, sans-serif;
+            font-family: "Comic Sans MS", sans-serif;
             color: #ff4500
         }
     </style>
 </head>
-
+	
 <body>
-
-	<img src="IMG_1077.gif" style="width:1000px;">
-
-    <div id="movingWord">Jollibruh</div>
     
-    <script>
+    <img src="IMG_1077.gif" style="width:1000px;">
+    <!--<div id="movingWord">Jollibruh</div>-->
+    
+    <marquee id="movingWord" scrollamount="20" direction="right">
+    Jollibruh
+    </marquee>
+    
+    <!--<script>
     	const word = document.getElementById("movingWord");
         let position = 0; 
         const speed = 5;
@@ -50,8 +48,7 @@
     
     	moveWord();
 
-        
-    </script>
+    </script>-->
             
 
 </body>
