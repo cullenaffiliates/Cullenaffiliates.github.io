@@ -2,32 +2,35 @@
 <html>
 <head>
     <style>
-    	.image-container {
+				.container {
         	position: relative;
     		width: 1200px;
       		height: 800px;  
     	}
         
-        .base-image {
+        .background {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
     	}
         
-        .overlay-gif {
+        .gif {
         	position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 150px;
-            opacity: 0.8;
-        		z-index: 1;
+            top: 50px;
+            left: 50px;
+            width: 2000px;
+        		z-index: 2;
     	}
     </style>
 </head>
 <body>
-    <div class="image-container">
-    	<img src="IMG_1086.jpeg" alt="background" class="base-image">
-		<img src="IMG_1083.gif" alt="GIF Overlay" class=overlay-gif">
+    <div class="container">
+    	<img src="IMG_1086.jpeg" alt="Background" class="background">
+		<img src="IMG_1083.gif" alt="GIF Overlay" class="gif">
     </div>
 </body>
 </html>
