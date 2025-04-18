@@ -1,41 +1,202 @@
 <!DOCTYPE html>
-<html lang-"en">
+<html lang="en">
 <head>
-    <title>jollibruh</title>
-    <style>
-    	.gif-container {
-        	position: absolute;
-    		width: 1200px;
-      		height: 800px;  
-    	}
-        
-        .gif {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            top: 0;
-            left: 0;
-        }
-        
-        .gif-background {
-            y-index: 5;
-            z-index: 1;
-            opacity: 0.8;
-        }
-        
-        .gif-foreground {
-        	z-index: 2;
-            opacity: 1;
-            height: 100% 
-        }
-        
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop Page</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: url('XXX.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      width: 100%;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Top Nav */
+    .top-nav {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      background: white;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    /* Fullscreen Menu Overlay */
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .menu-overlay.active {
+      display: flex;
+    }
+
+    .menu-overlay a {
+      color: white;
+      font-size: 2rem;
+      margin: 20px;
+      text-decoration: none;
+    }
+
+    /* Center media section */
+    .media-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .media-container img.above {
+      width: 200px;
+      margin-bottom: 10px;
+    }
+
+    .media-container img.gif {
+      width: 300px;
+    }
+
+    /* Shop grid */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .product {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product .price {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .product button {
+      padding: 8px 16px;
+      background-color: orange;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background-color: darkorange;
+    }
+  </style>
 </head>
 <body>
-    <div class="gif-container">
-    	<img src="IMG_1086.jpeg" class="gif gif-background">
-		<img src="IMG_1088.gif" class="gif gif-foreground">
+  <div class="overlay">
+    <!-- Top bar with hamburger -->
+    <div class="top-nav">
+      <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
+
+    <!-- Fullscreen Menu Overlay -->
+    <div id="menuOverlay" class="menu-overlay">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">Contact</a>
+      <a href="#" onclick="toggleMenu()">Close</a>
+    </div>
+
+    <!-- Central Images -->
+    <div class="media-container">
+      <img src="XXX2.jpg" alt="Top Image" class="above" />
+      <img src="XXX.gif" alt="Overlay GIF" class="gif" />
+    </div>
+
+    <!-- Shop Grid -->
+    <div class="shop-grid">
+      <div class="product">
+        <img src="https://via.placeholder.com/200x150" alt="Product Image">
+        <div class="product-footer">
+          <div class="price">$9.99</div>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x150" alt="Product Image">
+        <div class="product-footer">
+          <div class="price">$12.49</div>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+      <div class="product">
+        <img src="https://via.placeholder.com/200x150" alt="Product Image">
+        <div class="product-footer">
+          <div class="price">$5.75</div>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menuOverlay');
+      menu.classList.toggle('active');
+    }
+  </script>
 </body>
 </html>
