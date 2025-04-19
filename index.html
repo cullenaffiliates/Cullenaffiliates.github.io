@@ -13,14 +13,14 @@
 
     body, html {
       font-family: sans-serif;
-      background: url("https://github.com/cullenaffiliates/Cullenaffiliates.github.io/blob/4fa46cb15281b7123cb8c24a7dabfa75a92f9332/IMG_1086.jpeg") no-repeat center center fixed;
+      background: url('XXX1.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
       min-height: 100vh;
     }
 
     .overlay {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.5);
       min-height: 100vh;
       width: 100%;
       padding: 1rem;
@@ -32,13 +32,15 @@
     .top-image {
       width: 80%;
       max-width: 300px;
-      margin-top: 1rem;
+      margin: 1rem auto;
+      display: block;
     }
 
     .main-gif {
-      width: 100%;
+      width: 80%;
       max-width: 320px;
-      margin: 1rem 0;
+      margin: 1rem auto;
+      display: block;
     }
 
     .shop-grid {
@@ -46,7 +48,7 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       margin-bottom: 2rem;
     }
 
@@ -74,6 +76,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0 0.3rem;
     }
 
     .product .price {
@@ -104,9 +107,13 @@
 </head>
 <body>
   <div class="overlay">
-    <img src="https://github.com/cullenaffiliates/Cullenaffiliates.github.io/blob/4fa46cb15281b7123cb8c24a7dabfa75a92f9332/Screenshot%202025-04-18%20235046.png" alt="Top Centered Image" class="top-image" />
-    <img src="https://github.com/cullenaffiliates/Cullenaffiliates.github.io/blob/4fa46cb15281b7123cb8c24a7dabfa75a92f9332/IMG_1082.gif" alt="Main GIF" class="main-gif" />
+    <!-- Top Image -->
+    <img src="XXX2.jpg" alt="Top Centered Image" class="top-image" onerror="this.src='https://via.placeholder.com/300x100?text=Top+Image'" />
 
+    <!-- GIF -->
+    <img src="XXX.gif" alt="Main GIF" class="main-gif" onerror="this.src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif'" />
+
+    <!-- Shop Grid -->
     <div class="shop-grid">
       <div class="product">
         <img src="https://via.placeholder.com/150" alt="Product 1">
@@ -154,4 +161,5 @@
   </div>
 </body>
 </html>
+
 
