@@ -82,6 +82,7 @@
     }
     .input-container {
       display: flex;
+      align-items: center;
       padding: 10px;
       border-top: 1px solid #ccc;
       background-color: #fff;
@@ -97,7 +98,7 @@
       border-radius: 20px;
       outline: none;
     }
-    .input-container button {
+    .input-container button, .input-container .mic-btn {
       margin-left: 10px;
       padding: 10px 15px;
       background-color: #ff66a3;
@@ -134,8 +135,8 @@
       "Blobby BLOBBY BLOBBY BLOBBY blobby?",
       "Edmonds told me to never tell anyone the truth about that",
       "I had a UK number one hit",
-      "BLOOOOOOOOOOOBBY blobby blob"
-      "blob"
+      "BLOOOOOOOOOOOBBY blobby blob",
+      "blob",
     ];
 
     function sendMessage() {
@@ -167,7 +168,7 @@
       messageDiv.className = 'message response';
 
       const avatar = document.createElement('img');
-      avatar.src = 'https://plunge-creations.transforms.svdcdn.com/production/content-images/Mr-Blobby-costume-banner.jpg?w=1280&h=1280&auto=compress%2Cformat&fit=crop&dm=1734438321&s=a9fb9339ecdb5cf99f41b343ea219d8a'; // Placeholder image, replace with actual path
+      avatar.src = 'avatar.jpg'; // Placeholder image, replace with actual path
 
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
@@ -188,4 +189,5 @@
   </script>
 </body>
 </html>
+
 
