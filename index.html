@@ -1,165 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mobile Shop</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blobby Chat</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
 
-    body, html {
-      font-family: sans-serif;
-      background: url('XXX1.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-      min-height: 100vh;
-    }
-
-    .overlay {
-      background: rgba(0, 0, 0, 0.5);
-      min-height: 100vh;
-      width: 100%;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .top-image {
-      width: 80%;
-      max-width: 300px;
-      margin: 1rem auto;
-      display: block;
-    }
-
-    .main-gif {
-      width: 80%;
-      max-width: 320px;
-      margin: 1rem auto;
-      display: block;
-    }
-
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      width: 100%;
-      max-width: 420px;
-      margin-bottom: 2rem;
-    }
-
-    .product {
-      background-color: rgba(255, 255, 255, 0.9);
-      color: #222;
-      border-radius: 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0.5rem;
-    }
-
-    .product img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .product-footer {
-      margin-top: 0.5rem;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 0.3rem;
-    }
-
-    .product .price {
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .product button {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-      background-color: orange;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .product button:hover {
-      background-color: darkorange;
-    }
-
-    @media screen and (max-width: 400px) {
-      .shop-grid {
-        grid-template-columns: 1fr 1fr;
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #ffe6f0;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="overlay">
-    <!-- Top Image -->
-    <img src="XXX2.jpg" alt="Top Centered Image" class="top-image" onerror="this.src='https://via.placeholder.com/300x100?text=Top+Image'" />
-
-    <!-- GIF -->
-    <img src="XXX.gif" alt="Main GIF" class="main-gif" onerror="this.src='https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif'" />
-
-    <!-- Shop Grid -->
-    <div class="shop-grid">
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Product 1">
-        <div class="product-footer">
-          <div class="price">$9.99</div>
-          <button>Add</button>
-        </div>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Product 2">
-        <div class="product-footer">
-          <div class="price">$14.99</div>
-          <button>Add</button>
-        </div>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Product 3">
-        <div class="product-footer">
-          <div class="price">$8.49</div>
-          <button>Add</button>
-        </div>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Product 4">
-        <div class="product-footer">
-          <div class="price">$11.99</div>
-          <button>Add</button>
-        </div>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Product 5">
-        <div class="product-footer">
-          <div class="price">$6.75</div>
-          <button>Add</button>
-        </div>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/150" alt="Product 6">
-        <div class="product-footer">
-          <div class="price">$13.50</div>
-          <button>Add</button>
-        </div>
-      </div>
+      .background-circles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .circle {
+        position: absolute;
+        background-color: rgba(255, 255, 150, 0.4);
+        border-radius: 50%;
+      }
+      .circle1 {
+        width: 120px;
+        height: 120px;
+        top: 10%;
+        left: 15%;
+      }
+      .circle2 {
+        width: 80px;
+        height: 80px;
+        top: 50%;
+        left: 70%;
+      }
+      .circle3 {
+        width: 100px;
+        height: 100px;
+        top: 75%;
+        left: 30%;
+      }
+      .header {
+        text-align: center;
+        font-family: "Luckiest Guy", cursive;
+        font-size: 2.5em;
+        color: yellow;
+        text-shadow: 2px 2px 0 black, 4px 4px 0 black;
+        padding: 10px;
+        z-index: 1;
+      }
+      .chat-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        overflow-y: auto;
+        z-index: 1;
+      }
+      .message {
+        display: flex;
+        margin: 10px 0;
+        max-width: 70%;
+      }
+      .user {
+        align-self: flex-end;
+        justify-content: flex-end;
+      }
+      .response {
+        align-self: flex-start;
+        justify-content: flex-start;
+        flex-direction: row;
+      }
+      .response img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .bubble {
+        padding: 10px;
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .input-container {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        background-color: #fff;
+        z-index: 1;
+      }
+      .input-container input {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        outline: none;
+      }
+      .input-container button {
+        margin-left: 10px;
+        padding: 10px 15px;
+        background-color: #ff66a3;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background-circles">
+      <div class="circle circle1"></div>
+      <div class="circle circle2"></div>
+      <div class="circle circle3"></div>
     </div>
-  </div>
-</body>
+    <div class="header">BlobbyChat™</div>
+    <div class="chat-container" id="chat"></div>
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+      const responses = [
+        "Blobby",
+        "Blobby blobby",
+        "Blobby?",
+        "BLOBBY!",
+        "BLOBBY BLOBBY!!",
+        "...blobby",
+      ];
+
+      function sendMessage() {
+        const input = document.getElementById("userInput");
+        const message = input.value.trim();
+        if (message === "") return;
+
+        addMessage(message, "user");
+        input.value = "";
+        setTimeout(() => addResponse(), 500);
+      }
+
+      function addMessage(text, type) {
+        const chat = document.getElementById("chat");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${type}`;
+
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.textContent = text;
+        messageDiv.appendChild(bubble);
+        chat.appendChild(messageDiv);
+        chat.scrollTop = chat.scrollHeight;
+      }
+
+      function addResponse() {
+        const chat = document.getElementById("chat");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "message response";
+
+        const avatar = document.createElement("img");
+        avatar.src =
+          "https://plunge-creations.transforms.svdcdn.com/production/content-images/Mr-Blobby-costume-banner.jpg?w=1280&h=1280&auto=compress%2Cformat&fit=crop&dm=1734438321&s=a9fb9339ecdb5cf99f41b343ea219d8a"; // Placeholder image, replace with actual path
+
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.textContent =
+          responses[Math.floor(Math.random() * responses.length)];
+
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(bubble);
+        chat.appendChild(messageDiv);
+        chat.scrollTop = chat.scrollHeight;
+      }
+
+      // Submit message with Enter key
+      document
+        .getElementById("userInput")
+        .addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            sendMessage();
+          }
+        });
+    </script>
+  </body>
 </html>
-
-
