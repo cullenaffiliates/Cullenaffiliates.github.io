@@ -1,197 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blobby Chat</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Blobby Chat</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #ffe6f0;
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        position: relative;
-        overflow: hidden;
-      }
-      .background-circles {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
-      }
-      .circle {
-        position: absolute;
-        background-color: rgba(255, 255, 150, 0.4);
-        border-radius: 50%;
-      }
-      .circle1 {
-        width: 120px;
-        height: 120px;
-        top: 10%;
-        left: 15%;
-      }
-      .circle2 {
-        width: 80px;
-        height: 80px;
-        top: 50%;
-        left: 70%;
-      }
-      .circle3 {
-        width: 100px;
-        height: 100px;
-        top: 75%;
-        left: 30%;
-      }
-      .header {
-        text-align: center;
-        font-family: "Luckiest Guy", cursive;
-        font-size: 2.5em;
-        color: yellow;
-        text-shadow: 2px 2px 0 black, 4px 4px 0 black;
-        padding: 10px;
-        z-index: 1;
-      }
-      .chat-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        overflow-y: auto;
-        z-index: 1;
-      }
-      .message {
-        display: flex;
-        margin: 10px 0;
-        max-width: 70%;
-      }
-      .user {
-        align-self: flex-end;
-        justify-content: flex-end;
-      }
-      .response {
-        align-self: flex-start;
-        justify-content: flex-start;
-        flex-direction: row;
-      }
-      .response img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
-      .bubble {
-        padding: 10px;
-        border-radius: 20px;
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      .input-container {
-        display: flex;
-        padding: 10px;
-        border-top: 1px solid #ccc;
-        background-color: #fff;
-        z-index: 1;
-      }
-      .input-container input {
-        flex: 1;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-        outline: none;
-      }
-      .input-container button {
-        margin-left: 10px;
-        padding: 10px 15px;
-        background-color: #ff66a3;
-        color: white;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="background-circles">
-      <div class="circle circle1"></div>
-      <div class="circle circle2"></div>
-      <div class="circle circle3"></div>
-    </div>
-    <div class="header">BlobbyChat™</div>
-    <div class="chat-container" id="chat"></div>
-    <div class="input-container">
-      <input type="text" id="userInput" placeholder="Type a message..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffe6f0;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .background-circles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .circle {
+      position: absolute;
+      background-color: rgba(255, 255, 150, 0.4);
+      border-radius: 50%;
+    }
+    .circle1 { width: 120px; height: 120px; top: 10%; left: 15%; }
+    .circle2 { width: 80px; height: 80px; top: 50%; left: 70%; }
+    .circle3 { width: 100px; height: 100px; top: 75%; left: 30%; }
+    .header {
+      text-align: center;
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 2.5em;
+      color: yellow;
+      text-shadow: 2px 2px 0 black, 4px 4px 0 black;
+      padding: 10px;
+      z-index: 1;
+    }
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      overflow-y: auto;
+      z-index: 1;
+    }
+    .message {
+      display: flex;
+      margin: 10px 0;
+      max-width: 70%;
+    }
+    .user {
+      align-self: flex-end;
+      justify-content: flex-end;
+    }
+    .response {
+      align-self: flex-start;
+      justify-content: flex-start;
+      flex-direction: row;
+    }
+    .response img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .bubble {
+      padding: 10px;
+      border-radius: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .input-container {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background-color: #fff;
+      z-index: 1;
+      position: sticky;
+      bottom: 0;
+    }
+    .input-container input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+    .input-container button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      background-color: #ff66a3;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-circles">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+  </div>
+  <div class="header">BlobbyChat™</div>
+  <div class="chat-container" id="chat"></div>
+  <div class="input-container">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
 
-    <script>
-      const responses = [
-        "Blobby",
-        "Blobby blobby",
-        "Blobby?",
-        "BLOBBY!",
-        "BLOBBY BLOBBY!!",
-        "...blobby",
-      ];
+  <script>
+    const responses = [
+      "Blobby", 
+      "Blobby blobby", 
+      "Blobby?", 
+      "BLOBBY!", 
+      "BLOBBY BLOBBY!!", 
+      "...blobby",
+      "Blobby blobby blobby blobby blobbyblobby",
+      "I say old fellow, how the devil are you?",
+    ];
 
-      function sendMessage() {
-        const input = document.getElementById("userInput");
-        const message = input.value.trim();
-        if (message === "") return;
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const message = input.value.trim();
+      if (message === '') return;
 
-        addMessage(message, "user");
-        input.value = "";
-        setTimeout(() => addResponse(), 500);
+      addMessage(message, 'user');
+      input.value = '';
+      setTimeout(() => addResponse(), 500);
+    }
+
+    function addMessage(text, type) {
+      const chat = document.getElementById('chat');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${type}`;
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.textContent = text;
+      messageDiv.appendChild(bubble);
+      chat.appendChild(messageDiv);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function addResponse() {
+      const chat = document.getElementById('chat');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message response';
+
+      const avatar = document.createElement('img');
+      avatar.src = 'https://plunge-creations.transforms.svdcdn.com/production/content-images/Mr-Blobby-costume-banner.jpg?w=1280&h=1280&auto=compress%2Cformat&fit=crop&dm=1734438321&s=a9fb9339ecdb5cf99f41b343ea219d8a'; // Placeholder image, replace with actual path
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.textContent = responses[Math.floor(Math.random() * responses.length)];
+
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(bubble);
+      chat.appendChild(messageDiv);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    // Submit message with Enter key
+    document.getElementById('userInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
       }
-
-      function addMessage(text, type) {
-        const chat = document.getElementById("chat");
-        const messageDiv = document.createElement("div");
-        messageDiv.className = `message ${type}`;
-
-        const bubble = document.createElement("div");
-        bubble.className = "bubble";
-        bubble.textContent = text;
-        messageDiv.appendChild(bubble);
-        chat.appendChild(messageDiv);
-        chat.scrollTop = chat.scrollHeight;
-      }
-
-      function addResponse() {
-        const chat = document.getElementById("chat");
-        const messageDiv = document.createElement("div");
-        messageDiv.className = "message response";
-
-        const avatar = document.createElement("img");
-        avatar.src =
-          "https://plunge-creations.transforms.svdcdn.com/production/content-images/Mr-Blobby-costume-banner.jpg?w=1280&h=1280&auto=compress%2Cformat&fit=crop&dm=1734438321&s=a9fb9339ecdb5cf99f41b343ea219d8a"; // Placeholder image, replace with actual path
-
-        const bubble = document.createElement("div");
-        bubble.className = "bubble";
-        bubble.textContent =
-          responses[Math.floor(Math.random() * responses.length)];
-
-        messageDiv.appendChild(avatar);
-        messageDiv.appendChild(bubble);
-        chat.appendChild(messageDiv);
-        chat.scrollTop = chat.scrollHeight;
-      }
-
-      // Submit message with Enter key
-      document
-        .getElementById("userInput")
-        .addEventListener("keydown", function (event) {
-          if (event.key === "Enter") {
-            sendMessage();
-          }
-        });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
+
