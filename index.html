@@ -501,7 +501,7 @@ function resetInactivityTimer() {
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
     addResponse();
-  }, 10000); // 30 seconds
+  }, 20000); // 30 seconds
 }
 
 // Modify sendMessage to also reset the timer
