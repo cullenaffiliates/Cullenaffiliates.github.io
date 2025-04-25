@@ -489,6 +489,24 @@
         sendMessage();
       }
     });
+   // Automatically post a response on page load
+window.addEventListener('load', () => {
+  addResponse();
+  resetInactivityTimer();
+});
+
+let inactivityTimer;
+
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    addResponse();
+  }, 10000); // 30 seconds
+}
+
+// Reset the timer when the user types or sends a message
+document.getElementById('userInput').addEventListener('input', resetInactivityTimer);
+document.getElementById('userInput').addEventListener('keydown', resetInactivityTimer);
   </script>
 </body>
 </html>
