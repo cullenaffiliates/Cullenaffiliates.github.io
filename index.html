@@ -501,12 +501,44 @@ function resetInactivityTimer() {
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
     addResponse();
-  }, 10000); // 30 seconds
+  }, 30000); // 30 seconds
 }
 
-// Reset the timer when the user types or sends a message
-document.getElementById('userInput').addEventListener('input', resetInactivityTimer);
-document.getElementById('userInput').addEventListener('keydown', resetInactivityTimer);
+// Modify sendMessage to also reset the timer
+function sendMessage() {
+  const input = document.getElementById('userInput');
+  const message = input.value.trim();
+  if (message === '') return;
+
+  addMessage(message, 'user');
+  input.value = '';
+  resetInactivityTimer();
+  setTimeout(() => {
+    addResponse();
+    resetInactivityTimer();
+  }, 500);
+}
+
+// Modify addResponse to reset the timer when called directly
+function addResponse() {
+  const chat = document.getElementById('chat');
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'message response';
+
+  const avatar = document.createElement('img');
+  avatar.src = 'Screenshot 2025-04-24 221211.png'; // Placeholder
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = responses[Math.floor(Math.random() * responses.length)];
+
+  messageDiv.appendChild(avatar);
+  messageDiv.appendChild(bubble);
+  chat.appendChild(messageDiv);
+  chat.scrollTop = chat.scrollHeight;
+
+  resetInactivityTimer();
+}
   </script>
 </body>
 </html>
