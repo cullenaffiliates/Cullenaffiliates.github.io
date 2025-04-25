@@ -555,7 +555,7 @@ document.addEventListener('touchmove', function (e) {
   if (!isPullingDown) return;
 
   const distance = e.touches[0].clientY - startY;
-  if (distance > 70) {
+  if (distance > 140) {
     location.reload();
     isPullingDown = false;
   }
