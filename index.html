@@ -539,6 +539,32 @@ function addResponse() {
 
   resetInactivityTimer();
 }
+
+
+let startY = 0;
+let isPullingDown = false;
+
+document.addEventListener('touchstart', function (e) {
+  if (window.scrollY === 0) {
+    startY = e.touches[0].clientY;
+    isPullingDown = true;
+  }
+}, { passive: true });
+
+document.addEventListener('touchmove', function (e) {
+  if (!isPullingDown) return;
+
+  const distance = e.touches[0].clientY - startY;
+  if (distance > 70) {
+    location.reload();
+    isPullingDown = false;
+  }
+}, { passive: true });
+
+document.addEventListener('touchend', function () {
+  isPullingDown = false;
+});
+
   </script>
 </body>
 </html>
