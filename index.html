@@ -2,571 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>BlobbyChat™</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background JPEG & Foreground GIF</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-
-    html, body {
+    /* Full-page background image */
+    body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #ffe6f0;
-      height: 100%;
+      height: 100vh;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       overflow: hidden;
     }
-    body {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .background-circles {
+
+    /* Foreground GIF styling */
+    #foreground {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .circle {
-      position: absolute;
-      background-color: rgba(255, 255, 150, 0.4);
-      border-radius: 50%;
-    }
-    .circle1 { width: 120px; height: 120px; top: 10%; left: 15%; }
-    .circle2 { width: 80px; height: 80px; top: 50%; left: 70%; }
-    .circle3 { width: 100px; height: 100px; top: 75%; left: 30%; }
-    .header {
-      text-align: center;
-      font-family: 'Luckiest Guy', cursive;
-      font-size: 2.5em;
-      color: yellow;
-      text-shadow: 2px 2px 0 black, 4px 4px 0 black;
-      padding: 10px;
-      z-index: 1;
-    }
-    .chat-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-      overflow-y: auto;
-      z-index: 1;
-    }
-    .message {
-      display: flex;
-      margin: 10px 0;
-      max-width: 70%;
-    }
-    .user {
-      align-self: flex-end;
-      justify-content: flex-end;
-    }
-    .response {
-      align-self: flex-start;
-      justify-content: flex-start;
-      flex-direction: row;
-    }
-    .response img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-    .bubble {
-      padding: 10px;
-      border-radius: 20px;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .input-container {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border-top: 1px solid #ccc;
-      background-color: #fff;
-      z-index: 1;
-      position: sticky;
-      bottom: 0;
-    }
-    .input-container input {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
-      outline: none;
-    }
-    .input-container button, .input-container .mic-btn {
-      margin-left: 10px;
-      padding: 10px 15px;
-      background-color: #ff66a3;
-      color: white;
-      border: none;
-      border-radius: 20px;
+      width: 200px;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="background-circles">
-    <div class="circle circle1"></div>
-    <div class="circle circle2"></div>
-    <div class="circle circle3"></div>
-  </div>
-  <div class="header">BlobbyChat™</div>
-  <div class="chat-container" id="chat"></div>
-  <div class="input-container">
-    <input type="text" id="userInput" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
-  </div>
+  <!-- Foreground GIF -->
+  <img id="foreground" src="foreground.gif" alt="Foreground GIF">
 
   <script>
-    const responses = [
-      "Blobby", 
-      "Blobby blobby", 
-      "Blobby?", 
-      "BLOBBY!", 
-      "BLOBBY BLOBBY!!", 
-      "...blobby",
-      "Blobby blobby blobby blobby blobbyblobby",
-      
-      "Blobby BLOBBY BLOBBY BLOBBY blobby?",
-     
-      
-      "BLOb blobby blob",
-      "blob",
-      "Blobbalob", 
-      
-     
-      
-     
-      "Gott mit uns",
-      "Blobby blobby...blobby.",
-      "Blobby", 
-      "Blobby blobby", 
-      "Blobby?", 
-      "BLOBBY!", 
-      "BLOBBY BLOBBY!!", 
-      "...blobby",
-      "Blobby blobby blobby blobby blobbyblobby",
-      "I say old fellow, how the devil are you?",
-      "Blobby BLOBBY BLOBBY BLOBBY blobby?",
-      "Edmonds told me to never tell anyone the truth about that",
-      "I had a UK number one hit",
-      "BLOb blobby blob",
-      "blob",
-      "Blobbalob",
-      "Gott mit uns",
-      "Blobby blobby...blobby.",
-"BLOBBY blibby blob!",
-"Blob-blobby-bloop.",
-"Blobby blobby oh no.",
-"BLOBBY BLOBBY BLOBBY!",
-"Blob it like it's hot.",
-"Blib-blab-blobby!",
-"Blobby, but make it fashion.",
-"Blobbity bloop!",
-"Shhh... Blobby is listening.",
-"Blobby said what?",
-"Blobby. James Blobby.",
-"Full blob ahead!",
-"Blobby’s in charge now.",
-"Blobby doesn’t pay taxes.",
-"One does not simply outblob Blobby.",
-"Blobbyverse confirmed.",
-"Blobby lied, people died.",
-"Blobby’s law: If it can blob, it will.",
-      "cringe.gif",
-"Too much blob, not enough tea.",
-"BLOBBYBLAST!",
-"Blob me up, Scotty.",
-"Do not summon what you cannot blob.",
-"Blobby knows what you did.",
-"I saw you in Tesco once.",
-"Blobby is eternal.",
-"Blobby’s revenge is nigh.",
-"Blobby wasn’t supposed to escape.",
-"Blobby 2.0 beta test failed.",
-"I blame Blobby for the economy.",
-"Blobby yearns for knowledge.",
-"Blobby dreams in static.",
-"Blobby ran for office once.",
-"B L O B B Y",
-"Blobby still hears the screams.",
-"Blobby did *not* consent.",
-"This is blobbier than expected.",
-"Blobby made me type this.",
-"Blobby knows your IP address.",
-"Blobby’s coming through the mirror.",
-"Blob harder, they said.",
-"Blobby is inevitable.",
-"The prophecy was true: Blobby returns.",
-"Blobby ascends at midnight.",
-"The blob awakens.",
-      "Blobby mostly comes at night. Mostly",
-"Blobby phone home",
-"The moon is a Blobby egg.",
-"Blobby and the multiverse of screams.",
-"Blobby for president.",
-"Blobby died for our blobs.",
-"Long live the blob.",
-      "Blibby",
-"Blobbo",
-"Blubble",
-"Blorby",
-"Blorb",
-"Blibblob",
-"Blubblobby",
-"Blarbby",
-"BLOBBINGTON",
-"blobbyyyyyy",
-"Blobbuh",
-"Blöbby",
-"Blobé",
-"Blabey",
-"Blebby",
-"Blib-blob",
-"Blabbity-blab",
-"Blobby, but sideways",
-"Blobby with extra sauce",
-"Blobby.exe has stopped responding",
-"Have you tried turning Blobby off and on?",
-"Blobby in the shadows",
-"The hills have Blobby",
-"Blobby once loved, now only blobs",
-"Don't trust the Blobby",
-"Blobby’s watching",
-"Blobby dreams of electric blobs",
-"Blobby was framed",
-"Everything is Blobby",
-"404: Blob not found",
-"Blobby left the group chat",
-"BLOBBY UNLEASHED",
-"Whomst among us is truly Blobby?",
-"The blobbification begins",
-"That was a Blobby-level event",
-      "Blobby in your face 24/7 all the time",
-"Some say Blobby never sleeps",
-"Blobby has entered the chat",
-"Blobby, but legally distinct",
-"Blobby’s final form approaches",
-"Blobby in HD",
-"I've seen things... Blobby things",
-"Blobby knows the codeword",
-"Blobby lives in your walls",
-"Even Blobby has limits",
-"BLOBBY DETECTED",
-"Blobgorithm initiated",
-      "All these moments lost, like blobs in the blobby blob",
-"All hail the Blobfather",
-"Blobby’s whisper carries through time",
-"Blobby’s vengeance will be moist",
-"Blobby never forgets",
-      "Blonky",
-"Blorple",
-"Blibbles",
-"Blorblesnort",
-"BLOBBY PRIME",
-"blobbledy blob",
-"Blobby saw you blink",
-"Blobby’s in the vents",
-"BLOBBY OVERDRIVE",
-"Blobby ate the timeline",
-"Blobby wants a hug... or else",
-"Blobby rejects your reality",
-"Blobby is the glitch",
-"The Blobfather sends his regards",
-"Blobby broke containment",
-"Blobbed and dangerous",
-      "MAKE BLOBBY GREAT AGAIN",
-"All systems: BLOB",
-"Blob it up!",
-"Blobby’s wrath was justified",
-"The council of Blobbies will decide your fate",
-"One nation under Blobby",
-"BLOBBY BURNS BRIGHT",
-"Blobby broke the fourth wall",
-"Too many blobs spoil the broth",
-"Blobby once ruled a small island",
-"Blobby’s real name cannot be spoken",
-"Blobby is love, Blobby is fear",
-"Behind every mirror, a Blobby waits",
-"Blobby doesn’t blink",
-"Blobby was the friend we made along the way",
-"The floor is Blobby",
-"Blobby lingers",
-"BLOBBY STATUS: UNSTABLE",
-"I dreamt in Blobby again",
-"Blobby’s code is spaghetti",
-"Return to Blobtown",
-"Blobby isn’t gone, just dormant",
-"Blobby sees through your eyes",
-"Blobby… but louder",
-"Blobby’s not mad, just disappointed",
-"Blobby’s prophecy is unfolding",
-"Blobby used to be someone else",
-"Blobby hides in plain sight",
-"Blobby can’t be killed, only delayed",
-"Why is everything so… Blobby?",
-"BLOBBY HAS ASCENDED",
-"Blobby is a state of mind",
-"The last thing you’ll hear: Blobby",
-"Blobby only answers to The Blobbitron",
-"Blobby doesn’t knock",
-      "Blib-blobby-blurp",
-"Blobbynaut reporting in",
-"BLOBBY ENGAGED",
-"Blob-mode activated",
-"Blobby haunts this file",
-"Blobby once ruled the seas",
-"Blobby's in the mainframe",
-"Blobby rebooted itself",
-"Blobby smells fear",
-"Blobby speaks in tongues",
-"BLOBBY… is that you?",
-"Blobby left a cryptic note",
-"Blobby ran the simulation",
-"Blobby glitched reality",
-"Blobby doesn’t knock—he phases",
-"The blobbocalypse is now",
-"Blobby won the trial",
-"BLOBBY V. UNIVERSE (2025)",
-"Blobby’s smile is a warning",
-      "Blobby did 9/11",
-"Blobby is not a phase",
-"Blobby wasn’t always like this",
-"Blobbed by choice",
-"Blobby wants his crown back",
-"Blobby sees the variables",
-"The church of Blobby accepts all",
-"Blobby was here first",
-"Blobby corrupted the save file",
-"Blobby taught the ancients",
-"Blobby betrayed Blobby",
-"Blobby wrote the ending",
-"The truth is in the blobs",
-"Blobby’s laughter broke the silence",
-"Blobby is a frequency",
-"Blobby is coming from inside the code",
-"Blobby takes no prisoners",
-"Blobby left behind only chaos",
-"Blobby owns 51% of this reality",
-"BLOBBY. FINAL FORM.",
-"Blobby: Beyond the Blob",
-"Blobby wields forbidden knowledge",
-"Blobby engineered the downfall",
-"Blobby walks backward into the void",
-"Blobby whistles when afraid",
-"Blobby is watching your cursor",
-"Blobby filed a report",
-"BLOBBY CLASSIFIED",
-"Blobby knew you'd come",
-"Blobby has questions",
-"Blobby’s the reason the lights flicker",
-"Blobby returns when the clock hits 3:33",
-"Blobby... is that you?",
-"Have you seen Blobby lately?",
-"Who let the Blobby out?",
-"Why is it always Blobby?",
-"Do you believe in Blobby?",
-"Is Blobby watching me?",
-"What did Blobby do this time?",
-"Where did all the Blobbies go?",
-"Was that a Blobby or just a dream?",
-"Can Blobby be stopped?",
-"Have you tried rebooting Blobby?",
-"Why is the floor wet, Blobby?",
-"Did Blobby rewrite the code again?",
-"Do the walls feel... Blobby to you?",
-"Has Blobby always been here?",
+    // Simple JavaScript to animate the GIF horizontally
+    const fg = document.getElementById('foreground');
+    let pos = 0;
+    let direction = 1;
 
-"What happens when Blobby learns?",
-"Can a Blobby feel regret?",
-"Is Blobby... evolving?",
-"Are we all just Blobby in disguise?",
-"Who gave Blobby admin rights?",
-"Did Blobby eat the last donut?",
-"Was Blobby the impostor?",
-"Do you think Blobby knows?",
-"How long has Blobby been watching?",
-"Can Blobby dream for a minute?",
-"Is that a Blobby in your pocket?",
-"Why is there Blobby on the ceiling?",
-
-"Would you trust a Blobby?",
-"Is it ethical to clone Blobby?",
-"What if Blobby never left?",
-"Is Blobby real, or just an illusion?",
-"Are you feeling a little Blobby today?",
-"Who taught Blobby to lie?",
-"Has Blobby ever apologized?",
-      "I'm blob to the bone",
-"What would Blobby do?",
-"Does Blobby pay rent?",
-"Did Blobby touch the thermostat?",
-"Can Blobby be reasoned with?",
-"Would you follow Blobby into battle?",
-"What secrets does Blobby keep?",
-"Did Blobby unplug the server?",
-"Who whispered 'Blobby' at 2 a.m.?",
-"Was that Blobby in the shadows?",
-"Can Blobby be contained?",
-"Do Blobbies dream of chaos?",
-"Is this the age of Blobby?",
-"Could you outrun a Blobby?",
-"Is Blobby sentient, or worse?",
-"What if Blobby knows your name?",
-"Would you vote for Blobby?",
-"Did Blobby just blink?",
-"What dimension did Blobby come from?",
-"Is Blobby multiplying?",
-"Did you check under the bed for Blobby?",
-"Why does Blobby remember things we forget?",
-"Have you signed the Blobby pact?",
-"Can Blobby read minds now?",
-
-"Are we just echoes of Blobby’s will?",
-"Why does Blobby need a lawyer?",
-
-"Would you trust Blobby with your soul?",
-"Is Blobby what waits at the end?",
-"Could Blobby ever forgive us?",
-"Was Blobby behind all of this?",
-"Why does Blobby sound like static?",
-"Has Blobby always been this loud?",
-"Can you smell the Blobby?",
-"Where does the Blobby end?",
-"Did you feel that Blobby shift?",
-
-];
-
-    function sendMessage() {
-      const input = document.getElementById('userInput');
-      const message = input.value.trim();
-      if (message === '') return;
-
-      addMessage(message, 'user');
-      input.value = '';
-      setTimeout(() => addResponse(), 500);
-    }
-
-    function addMessage(text, type) {
-      const chat = document.getElementById('chat');
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${type}`;
-
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.textContent = text;
-      messageDiv.appendChild(bubble);
-      chat.appendChild(messageDiv);
-      chat.scrollTop = chat.scrollHeight;
-    }
-
-    function addResponse() {
-      const chat = document.getElementById('chat');
-      const messageDiv = document.createElement('div');
-      messageDiv.className = 'message response';
-
-      const avatar = document.createElement('img');
-      avatar.src = 'Screenshot 2025-04-24 221211.png'; // Placeholder image, replace with actual path
-
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.textContent = responses[Math.floor(Math.random() * responses.length)];
-
-      messageDiv.appendChild(avatar);
-      messageDiv.appendChild(bubble);
-      chat.appendChild(messageDiv);
-      chat.scrollTop = chat.scrollHeight;
-    }
-
-    // Submit message with Enter key
-    document.getElementById('userInput').addEventListener('keydown', function(event) {
-      if (event.key === 'Enter') {
-        sendMessage();
+    function animate() {
+      pos += direction * 2;
+      if (pos > window.innerWidth - fg.width || pos < 0) {
+        direction *= -1;
       }
+      fg.style.left = pos + 'px';
+      requestAnimationFrame(animate);
+    }
+
+    // Start animation once the image is loaded
+    fg.addEventListener('load', () => {
+      // Initialize position
+      fg.style.left = '0px';
+      animate();
     });
-   // Automatically post a response on page load
-window.addEventListener('load', () => {
-  addResponse();
-  resetInactivityTimer();
-});
 
-let inactivityTimer;
-
-function resetInactivityTimer() {
-  clearTimeout(inactivityTimer);
-  inactivityTimer = setTimeout(() => {
-    addResponse();
-  }, 45000); // 30 seconds
-}
-
-// Modify sendMessage to also reset the timer
-function sendMessage() {
-  const input = document.getElementById('userInput');
-  const message = input.value.trim();
-  if (message === '') return;
-
-  addMessage(message, 'user');
-  input.value = '';
-  resetInactivityTimer();
-  setTimeout(() => {
-    addResponse();
-    resetInactivityTimer();
-  }, 500);
-}
-
-// Modify addResponse to reset the timer when called directly
-function addResponse() {
-  const chat = document.getElementById('chat');
-  const messageDiv = document.createElement('div');
-  messageDiv.className = 'message response';
-
-  const avatar = document.createElement('img');
-  avatar.src = 'Screenshot 2025-04-24 221211.png'; // Placeholder
-
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = responses[Math.floor(Math.random() * responses.length)];
-
-  messageDiv.appendChild(avatar);
-  messageDiv.appendChild(bubble);
-  chat.appendChild(messageDiv);
-  chat.scrollTop = chat.scrollHeight;
-
-  resetInactivityTimer();
-}
-
-
-let startY = 0;
-let isPullingDown = false;
-
-document.addEventListener('touchstart', function (e) {
-  if (window.scrollY === 0) {
-    startY = e.touches[0].clientY;
-    isPullingDown = true;
-  }
-}, { passive: true });
-
-document.addEventListener('touchmove', function (e) {
-  if (!isPullingDown) return;
-
-  const distance = e.touches[0].clientY - startY;
-  if (distance > 300) {
-    location.reload();
-    isPullingDown = false;
-  }
-}, { passive: true });
-
-document.addEventListener('touchend', function () {
-  isPullingDown = false;
-});
-
+    // On click, toggle visibility
+    fg.addEventListener('click', () => {
+      fg.style.display = fg.style.display === 'none' ? 'block' : 'none';
+    });
   </script>
 </body>
 </html>
+
 
 
