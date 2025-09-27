@@ -79,6 +79,47 @@
 
     /* Ensure images never overflow */
     img { max-width: 100%; display: block; }
+    /* Tap-to-zoom modal */
+.zoomable { cursor: zoom-in; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;                 /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-content {
+  position: relative;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.modal-content img {
+  max-width: 94vw;               /* leave small margin on sides */
+  max-height: 88vh;              /* leave room for the close button */
+  display: block;
+  border-radius: 8px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  line-height: 1;
+  border: none;
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+  font-size: 22px;
+  border-radius: 999px;
+  padding: 8px 10px;
+}
+
   </style>
 </head>
 <body>
@@ -113,6 +154,54 @@
       <img src="tee_dark.png" alt="Bottom image placeholder" />
     </section> -->
   </main>
+  <!-- Fullscreen image modal -->
+<div class="modal-overlay" id="imgModal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" id="imgModalClose" aria-label="Close">✕</button>
+    <img id="imgModalImg" alt="Expanded view" />
+  </div>
+</div>
+<script>
+  (function () {
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('imgModalImg');
+    const modalClose = document.getElementById('imgModalClose');
+
+    // Make grid images tappable (use data-full for higher-res if available)
+    const zoomables = document.querySelectorAll('.mobile-grid img, .bottom-image img');
+    zoomables.forEach(img => {
+      img.classList.add('zoomable');
+      img.addEventListener('click', () => {
+        const fullSrc = img.getAttribute('data-full') || img.src;
+        modalImg.src = fullSrc;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        // prevent background scroll on iOS
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+
+    // Close when tapping the dim area (but not the image)
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Close on ESC
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  })();
+</script>
+
 </body>
 </html>
 
