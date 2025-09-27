@@ -22,17 +22,13 @@
     /* HEADER (logo left, image right) */
     header {
       display: flex;
-      align-items: right;
+      align-items: center;
       gap: var(--gap);
       padding: 16px;
       background: transparent;
-      width: 100%; /* Image will take up the full width of the header */
-      height: 100%; /* Maintains the aspect ratio */
     }
     .logo-wordmark { height: 48px; width: auto; order: 1; }
-    
-
-   
+    .logo-mark { height: 44px; width: auto; order: 2; margin-left: 2px; }
 
     /* MAIN GRID — matches the sketch for mobile */
     main {
@@ -70,7 +66,7 @@
 
     /* Right column: tall GIF */
     .gif-col img {
-      width: 200%;
+      width: 100%;
       height: auto;
       border-radius: var(--radius);
       display: block;
@@ -87,7 +83,6 @@
 <body>
   <header>
     <img src="header.png" alt="JOLLIBRUH wordmark" class="logo-wordmark" />
-  
   </header>
 
   <main>
@@ -96,7 +91,7 @@
       <div class="links">
         <div class="card">
           <img src="Black Crop Front.png" alt="Product preview 1" />
-          <img src="Black Crop Back.png" alt="Product preview 1" />
+           <img src="Black Crop Back.png" alt="Product preview 1" />
           <a class="btn" href="https://yourshopifylink1.com" target="_blank" rel="noopener">Shopify link 1</a>
         </div>
         <div class="card">
@@ -108,7 +103,7 @@
 
       <!-- RIGHT: tall GIF -->
       <div class="gif-col">
-        <img src="gif_15.gif" alt="gif1" />
+        <img src="gif_small_15.gif" alt="gif1" />
       </div>
     </section>
 
@@ -119,3 +114,4 @@
   </main>
 </body>
 </html>
+
