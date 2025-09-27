@@ -22,7 +22,7 @@
 
     /* HEADER (logo left, image right) */
     header {
-      display: flex;
+      display: relative;
       align-items: center;
       gap: var(--gap);
       padding: 16px;
@@ -31,7 +31,7 @@
     .logo-wordmark { height: 100%; width: auto; order: 1; }
     /* Header full-width image with fixed aspect ratio */
     .header-image {
-  width: 50%;
+  width: 100%;
   aspect-ratio: 16 / 9;   /* adjust to 16:9, 21:9, 4:3, etc. */
   object-fit: cover;      /* fill the box while keeping ratio */
   display: block;
