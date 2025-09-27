@@ -21,16 +21,18 @@
 
     /* HEADER */
     header {
-      display: absolute;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      gap: var(--gap);
-      padding: 20px;
-      background: transparent; /* transparent background */
-      
-    }
-    .logo-wordmark { height: 120px; width: auto; order: 1; }
+  background-image: url('header.png');
+  background-size: cover;
+  background-position: center;
+  height: 50vh; /* Adjust height relative to viewport */
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  header {
+    background-image: url('header.png'); /* Use a smaller image for mobile */
+  }
+}
     
 
     /* HERO GIF */
