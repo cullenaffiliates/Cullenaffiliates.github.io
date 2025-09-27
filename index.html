@@ -10,40 +10,28 @@
       --card-w: 200px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f8f8f8;
+      background: url('Generated Image September 27, 2025 - 5_30PM.png') no-repeat center center fixed;
+      background-size: cover;
       text-align: center;
+      min-height: 100vh;
     }
 
     /* HEADER */
     header {
       display: flex;
-      flex-direction: row;            /* always keep images in a row */
+      flex-direction: row;
       align-items: center;
       justify-content: flex-start;
       gap: var(--gap);
       padding: 20px;
-      background: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      background: transparent; /* transparent background */
+      box-shadow: none;        /* removed grey line/shadow */
     }
-    /* First image: wordmark */
-    .logo-wordmark {
-      display: block;
-      height: 60px;                  /* base size */
-      width: auto;
-      order: 1;
-    }
-    /* Second image: always to the right */
-    .logo-mark {
-      display: block;
-      order: 2;
-      height: 60px;
-      width: auto;
-      margin-left: 4px;
-    }
+    .logo-wordmark { height: 60px; width: auto; order: 1; }
+    .logo-mark { height: 60px; width: auto; order: 2; margin-left: 4px; }
 
     /* HERO GIF */
     .hero-gif {
@@ -51,14 +39,9 @@
       justify-content: center;
       align-items: center;
       padding: 24px 16px;
-      background: #f0f0f0;
+      background: transparent;
     }
-    .hero-gif img {
-      max-width: min(100%, 900px);
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
+    .hero-gif img { max-width: min(100%, 900px); width: 100%; height: auto; border-radius: 8px; }
 
     /* PRODUCTS */
     .products {
@@ -90,10 +73,8 @@
     }
     .product a:hover { background: #e04848; }
 
-    /* Global image safety */
     img { max-width: 100%; height: auto; }
 
-    /* Responsive sizing for header images */
     @media (max-width: 992px) {
       .logo-wordmark { height: 54px; }
       .logo-mark { height: 50px; }
@@ -113,25 +94,23 @@
 </head>
 <body>
   <header>
-    <img src="Jollibruh_logo.png" alt="JOLLIBRUH wordmark" class="logo-wordmark" />
-    <img src="Backpanel_text_whiteoutline.png" alt="Placeholder 2 image" class="logo-mark" />
+    <img src="" alt="JOLLIBRUH wordmark" class="logo-wordmark" />
+    <img src="face_whitebackground.png" alt="Placeholder 2 image" class="logo-mark" />
   </header>
 
-  <!-- Centered GIF under header -->
   <section class="hero-gif">
     <img src="Gif final.gif" alt="gif1" />
   </section>
 
-  <!-- Two product cards linking to Shopify pages -->
   <section class="products">
     <div class="product">
-      <img src="placeholder7.png" alt="T-Shirt 1" />
-      <img src="placeholder7.png" alt="T-Shirt 1" />
+      <img src="shop_black_crop_front.jpg" alt="T-Shirt 1" />
+      <img src="shop_black_crop_back.jpg" alt="T-Shirt 1" />
       <a href="https://yourshopifylink1.com" target="_blank" rel="noopener noreferrer">Buy Now</a>
     </div>
     <div class="product">
-      <img src="placeholder8.png" alt="T-Shirt 2" />
-      <img src="placeholder8.png" alt="T-Shirt 2" />
+      <img src="shop_black_tee_front.jpg" alt="T-Shirt 2" />
+      <img src="shop_black_tee_back.jpg" alt="T-Shirt 2" />
       <a href="https://yourshopifylink2.com" target="_blank" rel="noopener noreferrer">Buy Now</a>
     </div>
   </section>
