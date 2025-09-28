@@ -88,9 +88,17 @@ width: min(100%, 420px); /* adjust 420px to taste */
 max-width: 90vw; /* keeps a little side gutter on tiny screens */
 height: auto;
 border-radius: var(--radius);
+}
+.page-frame {
+border: 5px solid transparent; /* frame only; shows body background through */
+padding: 5px; /* keeps content off the edges */
+min-height: 100dvh; /* fill viewport height */
+box-sizing: border-box; /* include border+padding in size */
+}  
   </style>
 </head>
 <body>
+  <div class="page-frame">
   <!-- 1) Header image -->
   <header>
     <img src="logo_dark_tight.png" alt="Header image" class="header-image" />
