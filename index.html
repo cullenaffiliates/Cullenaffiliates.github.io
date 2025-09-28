@@ -125,6 +125,14 @@ border-radius: var(--radius);
 /* If your GIFs were inline, ensure no baseline gap (they aren’t by default, but just in case) */
 .gif-row img { display: block; }
 }
+@media (max-width: 600px) {
+.gif-row { margin-bottom: 0 !important; line-height: 0; }
+.gif-row img { display: block; vertical-align: top; }
+.product-strip { margin-top: 0 !important; padding-top: 0 !important; }
+.gif-row + .product-strip { margin-top: 0 !important; }
+/* Last-resort nudge (use only if you still see a hairline gap): */
+/* .gif-row + .product-strip { margin-top: -1px !important; } */
+}
   </style>
 </head>
 <body>
