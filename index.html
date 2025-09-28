@@ -95,6 +95,19 @@ padding: 5px; /* keeps content off the edges */
 min-height: 100dvh; /* fill viewport height */
 box-sizing: border-box; /* include border+padding in size */
 }  
+
+.gif-row {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: var(--gap);
+margin: var(--gap) 0; /* space above/below the row */
+}
+.gif-row img {
+width: 100%;
+height: auto; /* preserves the GIF's native ratio */
+display: block;
+border-radius: var(--radius);
+}    
   </style>
 </head>
 <body>
@@ -103,8 +116,13 @@ box-sizing: border-box; /* include border+padding in size */
   <header>
     <img src="logo_dark_tight.png" alt="Header image" class="header-image" />
   </header>
-  <div class="gif-wrap">
-<img src="gif_small_15.gif" alt="gif1" class="hero-gif" />
+    <section class="gif-row" aria-label="GIF previews">
+<img src="gif_small_15.gif" alt="GIF preview 1" class="zoomable" loading="lazy">
+<img src="gif_small_15.gif" alt="GIF preview 2" class="zoomable" loading="lazy">
+<img src="gif_small_15.gif" alt="GIF preview 3" class="zoomable" loading="lazy">
+</section>
+  <!--<div class="gif-wrap">
+<img src="gif_small_15.gif" alt="gif1" class="hero-gif" />-->
 </div>
 
   <!-- 2) GIF under header -->
