@@ -111,7 +111,20 @@ border-radius: var(--radius);
 .gif-row { margin-bottom: 0 !important; }
 .product-strip { margin-top: 0 !important; padding-top: 4px !important; }
 .product-strip .product-grid { margin-top: 0 !important; }
-   
+
+@media (max-width: 600px) {
+/* 1) Zero any margins involved */
+.gif-row { margin-bottom: 0 !important; }
+.product-strip { margin-top: 0 !important; padding-top: 0 !important; }
+.product-strip .product-grid { margin-top: 0 !important; }
+.gif-row + .product-strip { margin-top: 0 !important; }
+
+
+/* 2) Prevent odd margin-collapsing / rounding on iOS */
+.gif-row, .product-strip { contain: layout paint; }
+/* If your GIFs were inline, ensure no baseline gap (they aren’t by default, but just in case) */
+.gif-row img { display: block; }
+}
   </style>
 </head>
 <body>
