@@ -111,9 +111,20 @@ border-radius: var(--radius);
 .gif-row { margin-bottom: 0 !important; }
 .product-strip { margin-top: 0 !important; padding-top: 4px !important; }
 .product-strip .product-grid { margin-top: 0 !important; }
+    body { background: none !important; }
+    .bg-layer {
+position: fixed;
+inset: 0;
+z-index: 0; /* sits under content */
+background: url('Generated Image September 27, 2025 - 5_30PM.png') center center / cover no-repeat;
+will-change: transform;
+transform: translateZ(0); /* GPU hint for iOS Safari */
+}
+    .page-frame { position: relative; z-index: 1; }
   </style>
 </head>
 <body>
+  <div class="bg-layer" aria-hidden="true"></div>
   <div class="page-frame">
   <!-- 1) Header image -->
   <header>
